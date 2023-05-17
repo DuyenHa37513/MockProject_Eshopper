@@ -1,0 +1,54 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="row mt-5 tm-content-row tm-block-scroll" th:fragment="contentInit">
+    <div class="col-12 custom-bottom tm-block-col" >
+        <div class="tm-bg-primary-dark tm-block tm-block-taller">
+            <h2 class="tm-block-title">Orders List</h2>
+            <div class="tm-product-table-container">
+                <table class="table table-hover tm-table-small tm-product-table" id="order-list-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th scope="col">CUSTOMER NAME</th>
+                        <th scope="col">CUSTOMER PHONE</th>
+                        <th scope="col">TOTAL PRICE</th>
+                        <th scope="col">PAYMENT METHOD</th>
+                        <th scope="col">DELIVERY DATE</th>
+                        <th scope="col">SHIPPING UNIT</th>
+                        <th scope="col">SHIPPER PHONE</th>
+                        <th scope="col">ODER STATUS</th>
+                        <th scope="col">ITEMS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="order: ${orders}">
+                        <td><b th:text="${order.id}" /></td>
+                        <td><b th:text="${order.customer.lastName}" /></td>
+                        <td><b th:text="${order.customer.customerPhone}" /></td>
+                        <td><b th:text="${order.totalPrice}" /></td>
+                        <td><b th:text="${order.paymentMethod}" /></td>
+                        <td><b th:text="${order.deliveryDetail.deliveryDate}" /></td>
+                        <td><b th:text="${order.deliveryDetail.shippingUnit}" /></td>
+                        <td><b th:text="${order.deliveryDetail.shipperPhone}" /></td>
+                        <td>
+                            <div class="tm-status-circle moving" >
+                            </div><b th:text="${order.orderStatus.name}" />
+                        </td>
+                        <td>
+                        <td th:each="item: ${itemsDTOs}">
+                            <table>
+                                <tr>
+                                    <td><b th:text="${item.quantity}" /></td>
+                                    <td><b th:text="${item.product.productName}" /></td>
+                                </tr>
+                            </table>
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

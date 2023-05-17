@@ -1,0 +1,47 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="container mt-5" id="container" th:fragment="contentInit">
+    <div class="row tm-content-row">
+        <div class="col-12 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-products tm-block-h-auto">
+                <div class="tm-product-table-container">
+                    <table class="table table-hover tm-table-small tm-product-table display" id="post-manage-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">POST ID</th>
+                            <th scope="col">ACCOUNT NAME</th>
+                            <th scope="col">PRODUCT NAME</th>
+                            <th scope="col">EXPIRED DATE</th>
+                            <th scope="col">REASON</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="post:${listPost}">
+                            <td class="tm-user-id" th:text="${post.id}">
+                            <td class="tm-user-name" th:text="${post.accountName}">
+                            <td th:text="${post.product.productName}">
+                            <td th:text="${post.expiredDate}">
+                            <td th:text="${post.reason}">
+                            <td th:text="${post.status}">
+                            <td>
+                                <a th:href="@{'/post-manage/approved/' + ${post.id}}" class="tm-product-update-link">
+                                    <i class="fas fa-check tm-product-update-icon"></i>
+                                </a>
+                                <form th:action="@{'/post-manage/rejected/' + ${post.id}}" method="post">
+                                    <input type="hidden" id="rejectMsg" name="rejectMsg" />
+                                    <button type="submit" onclick="myinput()" class="tm-product-delete-link">
+                                        <i class="fas fa-trash-alt tm-product-delete-icon"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

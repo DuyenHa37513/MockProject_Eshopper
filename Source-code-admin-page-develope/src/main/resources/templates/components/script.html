@@ -1,0 +1,147 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="script">
+
+<!-- script common -->
+<script th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+<!-- https://jquery.com/download/ -->
+<script th:src="@{/static/js/moment.min.js}"></script>
+<!-- https://momentjs.com/ -->
+<script th:src="@{/static/js/Chart.min.js}"></script>
+<!-- http://www.chartjs.org/docs/latest/ -->
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<!-- https://getbootstrap.com/ -->
+<script th:src="@{/static/js/tooplate-scripts.js}"></script>
+<!-- script dataTable -->
+<script th:src="@{/static/js/datatables.min.js}"></script>
+
+<!-- script active navbar -->
+<script th:if="${direction} == 'container/products'">
+    $('#productsList').addClass("active");
+    <!-- script dataTable -->
+    $('#products-table').DataTable();
+</script>
+<script th:if="${direction} == 'container/accounts'">
+    $('#accountList').addClass("active");
+    <!-- script dataTable -->
+    $('#accounts-table').DataTable();
+</script>
+<script th:if="${direction} == 'container/post-manage'">
+    $('#postManagement').addClass("active");
+    <!-- script dataTable -->
+    $('#post-manage-table').DataTable();
+</script>
+<script th:if="${direction} == 'container/order-list-manage'">
+    $('#order').addClass("active");
+    <!-- script dataTable -->
+    $('#order-list-table').DataTable();
+</script>
+<script th:if="${direction} == 'container/news'">
+    $('#newsList').addClass("active");
+    <!-- script dataTable -->
+    $('#news-table').DataTable();
+</script>
+<script th:if="${direction} == 'container/notification-manage'">
+    $('#notificationList').addClass("active");
+</script>
+<script th:if="${direction} == 'container/create-account'">
+    $('#accountList').addClass("active");
+</script>
+<script th:if="${direction} == 'container/add-product'">
+    $('#productsList').addClass("active");
+</script>
+<script th:if="${direction} == 'container/edit-product'">
+    $('#productsList').addClass("active");
+</script>
+<script th:if="${direction} == 'container/update-user'">
+    $('#accountList').addClass("active");
+</script>
+
+<script th:if="${direction} == 'container/feedback'">
+    const btn = document.getElementById("btn-add");
+    var target = document.getElementById("input-2");
+
+    btn.addEventListener('click', function () {
+      target.innerHTML += `
+      <input type="text" th:field="*{reply}" name="reply" id="reply" class="form-control" placeholder="Enter your answer" required />
+                        <input type="hidden" th:field="*{id}" />
+      `;
+    });
+</script>
+
+<!-- script chart -->
+<script th:if="${direction} == 'container/init'">
+    Chart.defaults.global.defaultFontColor = 'white';
+    let ctxLine,
+        ctxBar,
+        ctxPie,
+        optionsLine,
+        optionsBar,
+        optionsPie,
+        configLine,
+        configBar,
+        configPie,
+        lineChart,
+    barChart, pieChart;
+    // DOM is ready
+    $(function () {
+        drawLineChart(); // Line Chart
+        drawBarChart(); // Bar Chart
+        drawPieChart(); // Pie Chart
+
+        $(window).resize(function () {
+            updateLineChart();
+            updateBarChart();
+        });
+    })
+
+</script>
+
+<!-- script datepicker -->
+<script th:if="${direction} == 'container/add-product'">
+    $(function() {
+        $("#expire_date").datepicker();
+    });
+</script>
+<script th:if="${direction} == 'container/add-product'" th:src="@{/static/jquery-ui-datepicker/jquery-ui.min.js}"></script>
+
+<script th:if="${direction} == 'container/edit-product'">
+    $(function() {
+        $("#expire_date").datepicker();
+    });
+</script>
+<script th:if="${direction} == 'container/edit-product'" th:src="@{/static/jquery-ui-datepicker/jquery-ui.min.js}"></script>
+<!--<script th:if="">function myFunction() {-->
+<!--    alert("Are you sure you want to delete this record?");-->
+<!--}-->
+<!--</script>-->
+<script th:if="${direction} == 'container/products'">
+    // this is the id of the form
+    $("#category_form").submit(function (e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        var form = {
+            categoryName: $("#category_name").val(),
+        };
+        $.ajax({
+            type: "POST",
+            url: "/api/v1/category/create",
+            data: form,
+            dataType: "json",
+            success: function () {
+                $("#categoryzone").get({
+                    url: "/api/v1/categories"
+                })
+            }
+        });
+        $(document).ajaxStop(function(){
+            window.location.reload();
+        });
+    });
+</script>
+<script th:if="${direction} == 'container/post-manage'">
+    function myinput() {
+        var reason = prompt("Please input reject reason:");
+        document.getElementById("rejectMsg").value = reason;
+    }
+</script>
+
+</body>
