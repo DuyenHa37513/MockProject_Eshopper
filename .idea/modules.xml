@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Mock Project_Eshoper.iml" filepath="$PROJECT_DIR$/.idea/Mock Project_Eshoper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MockEnd-main/MockEnd.iml" filepath="$PROJECT_DIR$/MockEnd-main/MockEnd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Source-code-admin-page-develope/com.training.iml" filepath="$PROJECT_DIR$/Source-code-admin-page-develope/com.training.iml" />
     </modules>
   </component>
 </project>
